@@ -1,56 +1,59 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visor 3D</title>
-    <style>
-        body { margin: 0; }
-        canvas { width: 100%; height: 100vh; display: block; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visor 3D</title>
+  <style>
+    body { margin: 0; }
+    canvas { width: 100%; height: 100vh; display: block; }
+  </style>
 </head>
 <body>
 
 <script type="module">
-    // Importar Three.js y GLTFLoader usando URL completa desde CDN
-    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.150.0/build/three.module.js';
-    import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.150.0/examples/jsm/loaders/GLTFLoader.js';
+  // Importaciones usando URL completas
+  import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.150.0/build/three.module.js';
+  import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.150.0/examples/jsm/loaders/GLTFLoader.js';
 
-    // Crear la escena y cámara
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+  // Crear escena y cámara
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  // Iluminación
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+  scene.add(ambientLight);
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+  directionalLight.position.set(5, 5, 5).normalize();
+  scene.add(directionalLight);
+
+  // Cargar el modelo GLTF
+  const loader = new GLTFLoader();
+  loader.load('https://joseeduardoriveran.github.io/ArchivoGlb/modeloLidar.glb', function (gltf) {
+    const model = gltf.scene;
+    scene.add(model);
+    camera.position.z = 5;
+
+    // Animación simple
+    function animate() {
+      requestAnimationFrame(animate);
+      model.rotation.y += 0.01;
+      renderer.render(scene, camera);
+    }
+    animate();
+  }, undefined, function (error) {
+    console.error('Error al cargar el modelo:', error);
+  });
+
+  // Ajuste de la ventana
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    // Agregar iluminación
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-    scene.add(ambientLight);
-
-    // Cargar el modelo .glb
-    const loader = new GLTFLoader();
-    loader.load('https://joseeduardoriveran.github.io/ArchivoGlb/modeloLidar.glb', function (gltf) {
-        const model = gltf.scene;
-        scene.add(model);
-        camera.position.z = 5;
-
-        // Animación simple
-        function animate() {
-            requestAnimationFrame(animate);
-            model.rotation.y += 0.01;
-            renderer.render(scene, camera);
-        }
-        animate();
-    }, undefined, function (error) {
-        console.error('Error al cargar el modelo:', error);
-    });
-
-    // Ajustar el tamaño al redimensionar la ventana
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
+  });
 </script>
 
 </body>
