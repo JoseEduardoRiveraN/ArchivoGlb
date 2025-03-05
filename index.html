@@ -3,41 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Visor 3D</title>
-<style>
-    body { margin: 0; }
-    canvas { width: 100%; height: 100vh; display: block; }
-</style>
+<title>Prueba Three.js</title>
 
-<!-- Importar Three.js y GLTFLoader aquí -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r150/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r150/examples/js/loaders/GLTFLoader.js"></script>
+<!-- Importar Three.js y GLTFLoader desde jsDelivr -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.150.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.150.0/examples/js/loaders/GLTFLoader.js"></script>
 </head>
 <body>
 
 <script>
-    // Este código va después de importar las librerías
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(5, 5, 5).normalize();
-    scene.add(light);
-
-    const loader = new THREE.GLTFLoader();
-    loader.load('modeloLidar.glb', function (gltf) {
-        scene.add(gltf.scene);
-        camera.position.z = 5;
-        function animate() {
-            requestAnimationFrame(animate);
-            gltf.scene.rotation.y += 0.01;  // Animación simple
-            renderer.render(scene, camera);
-        }
-        animate();
-    });
+    // Prueba básica para ver si THREE se carga
+    if (THREE) {
+        alert("Three.js se cargó correctamente!");
+    } else {
+        alert("Error al cargar Three.js");
+    }
 </script>
 
 </body>
