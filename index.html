@@ -1,28 +1,23 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Lector de GLB en AR</title>
-        <style>
-            body { margin: 0; overflow: hidden; }
-            #ar-prompt img { width: 50px; }
-        </style>
-    </head>
-    <body>
-        <model-viewer src="https://joseeduardoriveran.github.io/ArchivoGlb/SatelliteLidar.glb" 
-                      ar 
-                      ar-modes="webxr scene-viewer quick-look" 
-                      camera-controls 
-                      tone-mapping="neutral" 
-                      poster="poster.webp" 
-                      shadow-intensity="1">
-            <div class="progress-bar hide" slot="progress-bar">
-                <div class="update-bar"></div>
-            </div>
-            <button slot="ar-button" id="ar-button">View in your space</button>
-            <div id="ar-prompt">
-                <img src="https://modelviewer.dev/shared-assets/icons/hand.png" alt="AR prompt">
-            </div>
-        </model-viewer>
-        <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
-    </body>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visor de Modelo 3D</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
+    <style>
+        body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f3f3f3; }
+        model-viewer { width: 100%; max-width: 600px; height: 500px; }
+    </style>
+</head>
+<body>
+    <model-viewer 
+        src="https://joseeduardoriveran.github.io/ArchivoGlb/SatelliteLidar.glb"
+        alt="Modelo 3D"
+        ar
+        camera-controls
+        auto-rotate
+        shadow-intensity="1">
+    </model-viewer>
+</body>
 </html>
