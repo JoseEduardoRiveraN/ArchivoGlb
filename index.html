@@ -3,21 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visor de Modelo 3D</title>
+    <title>Selector de Modelos 3D</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
     <style>
-        body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f3f3f3; }
-        model-viewer { width: 100%; max-width: 600px; height: 500px; }
+        body { text-align: center; background: #f3f3f3; padding: 20px; }
+        model-viewer { width: 400px; height: 500px; margin-top: 20px; border-radius: 10px; background: white; }
+        select { padding: 10px; font-size: 16px; }
     </style>
 </head>
 <body>
-    <model-viewer 
-        src="https://joseeduardoriveran.github.io/ArchivoGlb/SatelliteLidar.glb"
-        alt="Modelo 3D"
-        ar
-        camera-controls
-        auto-rotate
-        shadow-intensity="1">
-    </model-viewer>
+
+    <h1>Visor de Modelos 3D</h1>
+    
+    <label for="modelSelector">Elige un modelo:</label>
+    <select id="modelSelector">
+        <option value="https://joseeduardoriveran.github.io/ArchivoGlb/SatelliteLidar.glb">Modelo 1</option>
+        <option value="https://joseeduardoriveran.github.io/ArchivoGlb/CloudSat.glb">Modelo 2</option>
+    </select>
+
+    <model-viewer id="viewer" src="https://joseeduardoriveran.github.io/ArchivoGlb/SatelliteLidar.glb" camera-controls auto-rotate></model-viewer>
+    <model-viewer id="viewer" src="https://joseeduardoriveran.github.io/ArchivoGlb/CloudSat.glb" camera-controls auto-rotate></model-viewer>
+
+    <script>
+        const selector = document.getElementById("modelSelector");
+        const viewer = document.getElementById("viewer");
+
+        selector.addEventListener("change", () => {
+            viewer.src = selector.value;
+        });
+    </script>
+
 </body>
 </html>
