@@ -3,35 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selector de Modelos 3D</title>
-    <script type="module" src="https://unpkg.com/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
+    <title>Galería de Modelos 3D</title>
     <style>
-        body { text-align: center; background: #f3f3f3; padding: 20px; }
-        model-viewer { width: 400px; height: 500px; margin-top: 20px; border-radius: 10px; background: white; }
-        select { padding: 10px; font-size: 16px; }
+        body { text-align: center; font-family: Arial, sans-serif; }
+        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .model-box { border: 2px solid #ccc; padding: 20px; background: white; }
     </style>
 </head>
 <body>
 
-    <h1>Visor de Modelos 3D</h1>
-    
-    <label for="modelSelector">Elige un modelo:</label>
-    <select id="modelSelector">
-        <option value="https://joseeduardoriveran.github.io/ArchivoGlb/SatelliteLidar.glb">Modelo 1</option>
-        <option value="https://joseeduardoriveran.github.io/ArchivoGlb/CloudSat.glb">Modelo 2</option>
-    </select>
+    <h1>Galería de Modelos 3D</h1>
 
-    <model-viewer id="viewer" src="https://joseeduardoriveran.github.io/ArchivoGlb/SatelliteLidar.glb" camera-controls auto-rotate></model-viewer>
-    <model-viewer id="viewer" src="https://joseeduardoriveran.github.io/ArchivoGlb/CloudSat.glb" camera-controls auto-rotate></model-viewer>
-
-    <script>
-        const selector = document.getElementById("modelSelector");
-        const viewer = document.getElementById("viewer");
-
-        selector.addEventListener("change", () => {
-            viewer.src = selector.value;
-        });
-    </script>
+    <div class="container">
+        <div class="model-box">
+            <h3>Modelo 1</h3>
+            <a href="Modelo1.html">Ver Modelo 1</a>
+        </div>
+        <div class="model-box">
+            <h3>Modelo 2</h3>
+            <a href="Modelo2.html">Ver Modelo 2</a>
+        </div>
+        <div class="model-box">
+            <h3>Modelo 3</h3>
+            <a href="Modelo3.html">Ver Modelo 3</a>
+        </div>
+        <div class="model-box">
+            <h3>Modelo 3</h3>
+            <a href="Modelo4.html">Ver Modelo 4</a>
+        </div>
+    </div>
 
 </body>
 </html>
